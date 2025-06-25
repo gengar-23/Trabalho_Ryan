@@ -123,10 +123,10 @@ int main() {
 
     printf("%.2f\n", appliedTax);
     printf("%s\n", "=================Relatório===================");
-    printf("| - Nome: %s\n", customerName);
+    printf("| - Nome: \033[34m%s\033[0m\n", customerName);
     printf("| - Tipo de instalação: %s\n", instalationType);
     if(eletricalConsume > 3000) {
-        printf("| - Consumo informado: (Excessivo)%.2f kWh\n", eletricalConsume);
+        printf("| - Consumo informado: \033[31m(Excessivo)\033[0m %.2f kWh\n", eletricalConsume);
     } else {
         printf("| - Consumo informado: %.2f kWh\n", eletricalConsume);
     }
