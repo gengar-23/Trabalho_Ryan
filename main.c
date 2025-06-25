@@ -4,9 +4,9 @@
 int main() {
     char customerName[100];
     float eletricalConsume = 0;
-    char instalationType;
     float appliedTax = 0;
     float result = 0;
+    int validador = 0;
 
     setlocale(LC_ALL, "Portuguese.UTF-8"); //TODO - Necessário para colocatar textos com pontuações brasileiras
     printf("%s", "Digite o seu nome: ");
@@ -18,9 +18,81 @@ int main() {
     printf("%.2f\n", eletricalConsume);
     while (getchar() != '\n'); // TODO - Isso aqui é devido o \n ficar no buffer
     printf("%s", "Informe o tipo de instalação ao qual sua rede se encaixa: " );
-    scanf("%c", &instalationType); // TODO - Colocar como um char longo
-    printf("%c\n", instalationType);
-    if (instalationType == 'R') {
+
+        char tipo1[] = "Residencial", tipo2[] = "Industrial", tipo3[] = "Comercial", instalationType[100];
+        int valid = 0;
+        int instalationTypesize = 0;
+  
+        
+        while (valid == 0) {
+        instalationTypesize = 0;
+        int usage = 0;
+        scanf("%99s", instalationType);
+
+            for (int p = 0; instalationType[p]  != '\0'; p++)
+            {
+                instalationTypesize++;
+            }
+            
+            usage = (instalationTypesize);
+            printf("%d", instalationTypesize);
+
+        //int lenght = sizeof(nome) / sizeof(nome[0]);
+
+            if (instalationType[0] == tipo1[0]) {   
+                for (int q = 0; q < usage; ) {
+                    if (instalationType[q] == tipo1[q]) {
+                        q++;
+                        if (q == usage - 1) {
+                            printf("\nVálidado");
+                            valid = 1;
+                            validador = 1;
+                        }
+                    } else {
+                            printf("Inválido, tente novamente.");
+                            valid = 0;
+                            break;
+                    }
+                } 
+            } else if (instalationType[0] == tipo2[0]){
+                for (int w = 0; w < usage; ) {
+                    if (instalationType[w] == tipo2[w]) {
+                        w++;
+                        if (w == usage - 1) {
+                            printf("\nVálidado");
+                            valid = 1;
+                            validador = 2;
+                        }
+                    } else {
+                        printf("Inválido, tente novamente.");
+                        valid = 0;
+                        break;
+                    }
+                }   
+            } else if (instalationType[0] == tipo3[0]) {
+                for (int e = 0; e < usage; ) {
+                    if (instalationType[e] == tipo3[e]) {
+                        e++;
+                        if (e == usage - 1) {
+                            printf("\nVálidado");
+                            valid = 1;
+                            validador = 3;
+                        }
+                    } else {
+                        printf("Inválido, tente novamente.");
+                        valid = 0;
+                        break;
+                    }
+                }
+            } else {
+                valid = 0;
+                printf("Inválido.");
+            }
+
+        }
+
+
+    if (validador == 1) {
         printf("%s\n", "Residencial");
         if (eletricalConsume <= 500) {
             appliedTax = 0.40;
@@ -28,7 +100,7 @@ int main() {
             appliedTax = 0.65;
         }
     }
-    if (instalationType == 'C') {
+    if (validador == 3) {
         printf("%s", "Comercial");
         if(eletricalConsume <= 1000) {
             appliedTax = 0.55;
@@ -36,7 +108,7 @@ int main() {
             appliedTax = 0.60;
         }
     }
-    if (instalationType == 'I') {
+    if (validador == 2) {
         printf("%s", "Industrial");
         if(eletricalConsume <= 5000){
             appliedTax = 0.55;
@@ -51,10 +123,10 @@ int main() {
 
     printf("%.2f\n", appliedTax);
     printf("%s\n", "=================Relatório===================");
-    printf("| - Nome: %s\n", customerName);
-    printf("| - Tipo de instalação: %c\n", instalationType);
+    printf("| - Nome: \033[34m%s\033[0m\n", customerName);
+    printf("| - Tipo de instalação: %s\n", instalationType);
     if(eletricalConsume > 3000) {
-        printf("| - Consumo informado: (Excessivo)%.2f kWh\n", eletricalConsume);
+        printf("| - Consumo informado: \033[31m(Excessivo)\033[0m %.2f kWh\n", eletricalConsume);
     } else {
         printf("| - Consumo informado: %.2f kWh\n", eletricalConsume);
     }
