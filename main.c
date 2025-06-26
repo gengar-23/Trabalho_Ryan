@@ -21,44 +21,40 @@ int main() {
 
         char tipo1[] = "Residencial", tipo2[] = "Industrial", tipo3[] = "Comercial", instalationType[100];
         int valid = 0;
-        int instalationTypesize = 0;
+        int instalationTypesize = 0;    //vai armazenar o tamanho da string
   
         
-        while (valid == 0) {
-        instalationTypesize = 0;
-        int usage = 0;
+        while (valid == 0) {    //Loop enquanto o tipo de instalação for inválido
+        instalationTypesize = 0;    //Zera para cada ciclo do loop
         scanf("%99s", instalationType);
 
-            for (int p = 0; instalationType[p]  != '\0'; p++)
+            for (int p = 0; instalationType[p]  != '\0'; p++)   //Vai acrescentar no tamanho da string caractere por caractere
             {
-                instalationTypesize++;
+                instalationTypesize++;      
             }
             
-            usage = (instalationTypesize);
-            printf("%d", instalationTypesize);
+            //printf("%d", instalationTypesize);
 
-        //int lenght = sizeof(nome) / sizeof(nome[0]);
-
-            if (instalationType[0] == tipo1[0]) {   
-                for (int q = 0; q < usage; ) {
+            if (instalationType[0] == tipo1[0]) {   //Vai checar com qual tipo de instalação a inicial bate
+                for (int q = 0; q < instalationTypesize; ) {    //A partir daqui  vai checar o resto das letras
                     if (instalationType[q] == tipo1[q]) {
                         q++;
-                        if (q == usage - 1) {
-                            printf("\nVálidado");
+                        if (q == instalationTypesize - 1) { //quando o q chegar na ultima letra e for igual ele vai validar
+                            printf("\nVálidado");           //e dar seguimento no codigo
                             valid = 1;
-                            validador = 1;
+                            validador = 1;                  //Aqui vai indicar o tipo de instalação
                         }
                     } else {
-                            printf("Inválido, tente novamente.");
+                            printf("Inválido, tente novamente.");   //Caso tenha digitado outra coisa vai pedir para tentar novamente
                             valid = 0;
-                            break;
+                            break;  //quebrar o loop de checagem
                     }
                 } 
-            } else if (instalationType[0] == tipo2[0]){
-                for (int w = 0; w < usage; ) {
+            } else if (instalationType[0] == tipo2[0]){     
+                for (int w = 0; w < instalationTypesize; ) {
                     if (instalationType[w] == tipo2[w]) {
                         w++;
-                        if (w == usage - 1) {
+                        if (w == instalationTypesize - 1) {
                             printf("\nVálidado");
                             valid = 1;
                             validador = 2;
@@ -70,10 +66,10 @@ int main() {
                     }
                 }   
             } else if (instalationType[0] == tipo3[0]) {
-                for (int e = 0; e < usage; ) {
+                for (int e = 0; e < instalationTypesize; ) {
                     if (instalationType[e] == tipo3[e]) {
                         e++;
-                        if (e == usage - 1) {
+                        if (e == instalationTypesize - 1) {
                             printf("\nVálidado");
                             valid = 1;
                             validador = 3;
@@ -84,14 +80,14 @@ int main() {
                         break;
                     }
                 }
-            } else {
+            } else {    //Caso ele não bata com nenhuma instalação ele vai dar inválido
                 valid = 0;
-                printf("Inválido.");
+                printf("Inválido, tente novamente");
             }
 
         }
 
-
+    //Conforme o valor do validador ele vai selecionar o tipo correto de instalação para selecionar a taxa aplicada
     if (validador == 1) {
         printf("%s\n", "Residencial");
         if (eletricalConsume <= 500) {
@@ -116,11 +112,13 @@ int main() {
             appliedTax = 0.60;
         }
     }
+    //Calcular o consumo elétrico
     result = eletricalConsume * appliedTax;
     if (eletricalConsume < 100) {
         eletricalConsume = eletricalConsume - (eletricalConsume * 0.05);
     }
 
+    //Imprimir o resultado com todas as informações
     printf("%.2f\n", appliedTax);
     printf("%s\n", "=================Relatório===================");
     printf("| - Nome: \033[34m%s\033[0m\n", customerName);
