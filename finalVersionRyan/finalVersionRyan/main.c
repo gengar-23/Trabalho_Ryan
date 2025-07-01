@@ -10,12 +10,12 @@ int main() {
     double eletricalConsume;  // Armazenará o consumo elétrico
     double appliedTax = 0;    // Informará a taxa a ser aplicada conforme a instalação e consumo
     double result = 0;        // Armazenará o valor final a ser pago
-    int validador = 0;        // Especificará o tipo de instalação para calcular a taxa
-                              // e também servirá para validar o nome
+    int validador = 0;        /* Especificará o tipo de instalação para calcular a taxa
+                                 e também servirá para validar o nome */
     int validadorConsumo = 0; // definirá quando o consumo informado for um numero valido ou não
 
-    setlocale(LC_ALL, "Portuguese.UTF-8"); // TODO - Necessário para colocatar
-                                           // textos com pontuações brasileiras
+    setlocale(LC_ALL, "Portuguese.UTF-8"); /* TODO - Necessário para colocatar
+                                              textos com pontuações brasileiras */
     while (validador != 1) {
         printf("%s", "Digite o seu nome (máx. 100 caracteres): ");
         int res = scanf("%100[^\n]", customerName);
@@ -77,43 +77,39 @@ int main() {
          tipore[] = "residencial", tipoin[] = "industrial", tipoco[] = "comercial", tipoRE[] = "RESIDENCIAL",
          tipoIN[] = "INDUSTRIAL", tipoCO[] = "COMERCIAL";
 
-    int valid = 0;
+    int valid = 0;  //Definirá se a instalação é ou não válida
     int instalationTypesize = 0; // vai armazenar o tamanho da string
 
     while (valid == 0) { // Loop enquanto o tipo de instalação for inválido
         instalationTypesize = 0; // Zera para cada ciclo do loop
         // TODO - Precisa modernizar a forma de fazer isso.
         scanf("%99s", instalationType);
-        for (int p = 0; instalationType[p] != '\0';
-            p++) // Vai acrescentar no tamanho da string caractere por caractere
+        for (int p = 0; instalationType[p] != '\0';p++) // Vai acrescentar no tamanho da string caractere por caractere
         {
             instalationTypesize++;
         }
         // printf("%d", instalationTypesize);
-        if ((instalationType[0] == tipoRe[0]) || (instalationType[0] == tipore[0])) {
-            // Vai checar com qual tipo de instalação a inicial bate
-            if (instalationTypesize == 1) {
+        if ((instalationType[0] == tipoRe[0]) || (instalationType[0] == tipore[0])) { /* Vai checar com qual tipo de instalação
+                                                                                         a inicial bate */
+            if (instalationTypesize == 1) { //Se escrever a inicial correta vai validar para dar seguimento
                 valid = 1;
                 validador = 1;
                 break;
             }
-            for (int q = 1; q < instalationTypesize;) { // A partir daqui  vai checar
-                // o resto das letras
-                if (instalationType[q] == tipoRe[q] ||
-                    instalationType[q] == tipoRE[q]) {
+            for (int q = 1; q < instalationTypesize;) { // A partir daqui  vai checar o resto das letras
+                if (instalationType[q] == tipoRe[q] || instalationType[q] == tipoRE[q]) {
                     q++; // TODO - Tem certeza que isso é necessário?
-                    if (q == instalationTypesize - 1) { // quando o q chegar na ultima letra e  for igual
-                        // ele vai validar e dar seguimento no codigo
-                        valid = 1;
-                        validador = 1; // Aqui vai indicar o tipo de instalação
+                    if (q == instalationTypesize - 1) { /* Quando o q chegar na ultima letra e  for igual
+                                                           ele vai validar e dar seguimento no codigo */
+                        valid = 1;                      // Valida para sair do loop
+                        validador = 1;                  // Aqui vai indicar o tipo de instalação
                         instalationType[0] = tipoRe[0];
                     }
                 } else {
-                    printf("\nInválido, tente novamente.\n"); // Caso tenha digitado outra
-                    // coisa vai pedir para
-                    // tentar novamente
+                    printf("\nInválido, tente novamente.\n"); /* Caso tenha digitado outra coisa vai pedir para
+                                                                 tentar novamente */
                     valid = 0;
-                    break; // quebrar o loop de checagem
+                    break;                                    // quebrar o loop de checagem
                 }
             }
         } else if (instalationType[0] == tipoIn[0] || instalationType[0] == tipoin[0]) {
@@ -137,16 +133,14 @@ int main() {
                     break;
                 }
             }
-        } else if ((instalationType[0] == tipoCo[0]) ||
-            (instalationType[0] == tipoco[0])) {
+        } else if (instalationType[0] == tipoCo[0] || instalationType[0] == tipoco[0]) {
             if (instalationTypesize == 1) {
                 valid = 1;
                 validador = 3;
                 break;
             }
             for (int e = 1; e < instalationTypesize;) {
-                if (instalationType[e] == tipoCo[e] ||
-                    instalationType[e] == tipoCO[e]) {
+                if (instalationType[e] == tipoCo[e] || instalationType[e] == tipoCO[e]) {
                     e++;
                     if (e == instalationTypesize - 1) {
                         printf("\nVálidado.\n");
@@ -154,21 +148,19 @@ int main() {
                         validador = 3;
                         instalationType[0] = tipoCo[0];
                     }
-                }
-                else {
+                } else {
                     printf("\nInválido, tente novamente.\n");
                     valid = 0;
                     break;
                 }
             }
-        }
-        else { // Caso ele não bata com nenhuma instalação ele vai dar inválido
+        } else { // Caso ele não bata com nenhuma instalação ele vai dar inválido
             valid = 0;
             printf("\nInválido, tente novamente.\n");
         }
     }
-    // Conforme o valor do validador ele vai selecionar o tipo correto de
-    // instalação para selecionar a taxa aplicada
+    /* Conforme o valor do validador ele vai selecionar o tipo correto de
+       instalação para selecionar a taxa aplicada */
     if (validador == 1) {
         printf("\n%s\n", "Residencial");
         if (eletricalConsume <= 500) {
@@ -205,6 +197,7 @@ int main() {
     printf("%s\n", "\e[0;35m==================\e[0mRelatório\e[0;35m============="
         "=====\e[0m");
     printf("\033[34m| - Nome: %s\033[0m;\n", customerName);
+    // Avaliará qual tipo de instalação é correspondente
     switch (validador) {
     case 1:
         printf("| - Tipo de instalação: \033[38;2;255;215;0;24m%s\033[0m;\n", "Residencial");
@@ -216,6 +209,7 @@ int main() {
         printf("| - Tipo de instalação: \033[38;2;255;215;0;24m%s\033[0m;\n", "Comercial");
         break;
     }
+
     if (eletricalConsume > 3000) {
         printf("\033[31m| - Consumo informado: (Excessivo) %.2lf kWh\033[0m;\n", eletricalConsume);
     }
