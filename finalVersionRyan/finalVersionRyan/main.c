@@ -90,7 +90,7 @@ int main() {
         }
         // printf("%d", instalationTypesize);
         if ((instalationType[0] == tipoRe[0]) || (instalationType[0] == tipore[0])) { /* Vai checar com qual tipo de instalação
-                                                                                         a inicial bate */
+                                                                                         a inicial bate (nesse caso Residencial) */
             if (instalationTypesize == 1) { //Se escrever a inicial correta vai validar para dar seguimento
                 valid = 1;
                 validador = 1;
@@ -112,7 +112,7 @@ int main() {
                     break;                                    // quebrar o loop de checagem
                 }
             }
-        } else if (instalationType[0] == tipoIn[0] || instalationType[0] == tipoin[0]) {
+        } else if (instalationType[0] == tipoIn[0] || instalationType[0] == tipoin[0]) { //Efetuar a mesma coisa para se for Industrial
             if (instalationTypesize == 1) {
                 valid = 1;
                 validador = 2;
@@ -133,7 +133,7 @@ int main() {
                     break;
                 }
             }
-        } else if (instalationType[0] == tipoCo[0] || instalationType[0] == tipoco[0]) {
+        } else if (instalationType[0] == tipoCo[0] || instalationType[0] == tipoco[0]) { //Efetuar a mesma coisa para se for Comercial
             if (instalationTypesize == 1) {
                 valid = 1;
                 validador = 3;
